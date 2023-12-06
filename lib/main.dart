@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:snow_depth_final_project/rest_api.dart';
 import 'package:snow_depth_final_project/snow_weather_api.dart';
-import 'rest_api.dart';
 
 void main() {
   runApp(SkiResortApp());
@@ -81,11 +79,11 @@ class ResortCard extends StatelessWidget {
         return AlertDialog(
           title: Text(resort.resortName),
           content: Text(
-            resort.state +
+            resort.resortName +
                 " \nSnow Depth: " +
-                resort.snowLast48Hours +
-                " \nExpert Runs: " +
-                resort.newSnowMax.toString(),
+                resort.newSnowMin +
+                " \nComments: " +
+                resort.snowComments.toString(),
           ),
           actions: <Widget>[
             TextButton(
@@ -110,13 +108,13 @@ class ResortCard extends StatelessWidget {
       child: ListTile(
         contentPadding: EdgeInsets.all(16.0),
         title: Text(
-          resort.resortName,
+          resort.resortName + ", " + resort.state,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 18.0,
           ),
         ),
-        subtitle: Text('Snow Last 2 Days: ${resort.snowLast48Hours}'),
+        subtitle: Text('Snow Last 2 Days: \n${resort.snowLast48Hours} inches'),
         trailing: Icon(Icons.arrow_forward),
         onTap: () {
           _showResortDetails(context);
