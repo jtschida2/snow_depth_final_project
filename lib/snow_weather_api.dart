@@ -37,7 +37,7 @@ class Item {
   String resortName;
   String state;
   DateTime reportDateTime;
-  ResortType resortType;
+  String resortType;
   String newSnowMin;
   String newSnowMax;
   String avgBaseDepthMin;
@@ -64,7 +64,7 @@ class Item {
     resortName: json["resortName"],
     state: json["state"],
     reportDateTime: DateTime.parse(json["reportDateTime"]),
-    resortType: resortTypeValues.map[json["resortType"]]!,
+    resortType: json["resortType"],
     newSnowMin: json["newSnowMin"],
     newSnowMax: json["newSnowMax"],
     avgBaseDepthMin: json["avgBaseDepthMin"],
@@ -78,7 +78,7 @@ class Item {
     "resortName": resortName,
     "state": state,
     "reportDateTime": reportDateTime.toIso8601String(),
-    "resortType": resortTypeValues.reverse[resortType],
+    "resortType": resortType,
     "newSnowMin": newSnowMin,
     "newSnowMax": newSnowMax,
     "avgBaseDepthMin": avgBaseDepthMin,
@@ -86,26 +86,4 @@ class Item {
     "snowLast48Hours": snowLast48Hours,
     "snowComments": snowComments,
   };
-}
-
-enum ResortType {
-  INTL,
-  NA_ALPINE
-}
-
-final resortTypeValues = EnumValues({
-  "Intl": ResortType.INTL,
-  "NA_Alpine": ResortType.NA_ALPINE
-});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
 }
